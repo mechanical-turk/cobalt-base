@@ -3,8 +3,10 @@ const { getOptions, getCommand } = require('./lib/argv-manager.js');
 const { loadGenerators } = require('cobalt-generator');
 
 function run() {
+  const generators = loadGenerators();
   config.COMMANDS = {
-    generate: loadGenerators(),
+    generate: generators.generate,
+    remove: generators.remove,
   };
   const options = getOptions();
   const command = getCommand(options);
