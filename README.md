@@ -74,16 +74,3 @@ config.GENERATORS_DIR = path.join(__dirname, 'generators');
 
 run();
 ```
-
-Step 2: Start Coding!
-
-You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
-
-Let's add some code so that cobalt can generate us the react component we want.
-
-- Create a file for the generator logic: `generators/component.js`
-- The filename is really important. It's how cobalt understands where to look. When you run `generate something` on the cli, cobalt will look for `generators/something.js`. When you run `generate dog`, cobalt will look for `generators/dog.js`.
-- Next, we need to create the templates. Cobalt uses `ejs` templates at the moment. You don't need to have `ejs` installed. At the moment, we want a template for our React component, and another one for its corresponding  
-
-
-- Every generator file has one responsibility: Exporting a function that returns 
