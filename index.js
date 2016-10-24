@@ -1,6 +1,6 @@
-const { config } = require('cobalt-common');
+const config = require('./config.js');
 const { getOptions, getCommand } = require('./lib/argv-manager.js');
-const { loadGenerators } = require('cobalt-generator');
+const { loadGenerators } = require('./lib/generator.js');
 
 function run() {
   const generators = loadGenerators();

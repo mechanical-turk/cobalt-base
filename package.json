@@ -9,7 +9,14 @@
   "author": "Kerem Kazan",
   "license": "ISC",
   "dependencies": {
+    "camelcase": "^3.0.0",
+    "cli-color": "^1.1.0",
     "command-line-args": "^3.0.1",
-    "lodash": "^4.16.4"
+    "decamelize": "^1.2.0",
+    "ejs": "^2.5.2",
+    "fs-extra": "^0.30.0",
+    "lodash": "^4.16.4",
+    "prompt-sync": "^4.1.4",
+    "uppercamelcase": "^1.1.0"
   }
 }
