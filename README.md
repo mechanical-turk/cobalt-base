@@ -58,9 +58,10 @@ cobalt framework is a tool for creating cli scaffolding tools. (It's a tool that
 
 Step 1: Setup
 
+- run `npm init` and set `index.js` as the entry point.
 - `npm i cobalt-base --save`
 - create two folders to store the templates and generator logic: `mkdir templates generators`
-- create a new project and an index.js in it:
+- create an index.js:
 
 ```js
 //index.js
