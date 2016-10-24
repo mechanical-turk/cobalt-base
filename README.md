@@ -20,7 +20,7 @@ project
     │   my_second_component.css
 ```
 
-What's more, you realize that you always have to code the same following lines for your components:
+What's more, you realize that you always have to code the same following lines for your react components:
 
 ```js
 import React, { Component, PropTypes } from 'react';
@@ -47,7 +47,7 @@ MyFirstComponent.defaultProps = {
 };
 ```
 
-What if you could type something like `generate component my-first-component` in your cli, and the rest was done automatically for you?
+What if you could type something like `generate component my-first-component` in your terminal, and the rest was done automatically for you?
 
 # Enter cobalt
 
@@ -59,12 +59,13 @@ cobalt-base is where all the modules that are part of the cobalt framework are b
 Step 1: Setup
 
 - `npm i cobalt-base --save`
+- create a new project and an index.js in it.
 - require path: `const path = require('path')`
 - require cobalt-base: `const { run, config } = require('cobalt-base');`
 - create two folders to store the templates and generator logic: `mkdir templates generators`
 - tell cobalt where your /templates and /generators folders are: 
 ```
-config.ROOT_TEMPLATES_DIR = path.join(__dirname, 'templates');
+config.TEMPLATES_DIR = path.join(__dirname, 'templates');
 config.GENERATORS_DIR = path.join(__dirname, 'generators');
 ```
 - tell cobalt that you're done with the setup: `run();`
@@ -72,6 +73,8 @@ config.GENERATORS_DIR = path.join(__dirname, 'generators');
 Example file after Setup:
 
 ```js
+//index.js
+
 const path = require('path');
 const { run, config } = require('cobalt-base');
 
@@ -93,15 +96,22 @@ myScaffold
 │   package.json
 └───node_modules
 │   └───cobalt-base
+│   └───...
 └───generators
 └───templates
 ```
 
 
-Let's add some code so that cobalt can generate us the react component we want.
+Let's add some code so that cobalt can dynamically generate us the react components we want.
 - Create a file for the generator logic: `generators/component.js`
-- The filename is really important. It's how cobalt understands where to look. When you run `generate something` on the cli, cobalt will look for `generators/something.js`. When you run `generate dog`, cobalt will look for `generators/dog.js`.
-- Next, we need to create the templates. Cobalt uses `ejs` templates at the moment. You don't need to have `ejs` installed. At the moment, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's create `templates/Component/stateful_component.ejs`, `templates/Component/stateless_component.ejs` and `templates/Stylesheet/component.ejs`
+- The filename **is** really important. It's how cobalt understands where to look. When you run `generate something` on the cli, cobalt will look for `generators/something.js`. When you run `generate dog`, cobalt will look for `generators/dog.js`.
+- Next, we need to create the templates. Cobalt uses `ejs` templates. You don't need to have `ejs` installed. 
+- At the moment, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates: 
+  - `templates/Component/stateful_component.ejs`
+  - `templates/Component/stateless_component.ejs` 
+  - `templates/Stylesheet/component.ejs`
+
+Our project directory should now look like this:
 
 ```
 myScaffold
@@ -153,8 +163,8 @@ export default class <%= pascalCaseName %> extends React.Component {
 ```js
 //templates/Component/stateless_component.ejs
 
-exports default (props) => {
-  
+export const <%= pascalCaseName %> = (props) => {
+
 };
 ```
 
