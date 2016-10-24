@@ -77,11 +77,7 @@ run();
 
 - this will tell cobalt where your /templates and /generators folders are, and then run the tool. 
 
-Step 2: Start Coding!
-
-You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
-
-If you've followed the steps above, you have something similar to this right now:
+If you've followed the steps, you should have something similar to this:
 
 ```
 myScaffold
@@ -94,6 +90,9 @@ myScaffold
 └───templates
 ```
 
+Step 2: Start Coding!
+
+You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
 
 Let's add some code so that cobalt can dynamically generate us the react components we want.
 - Create a file for the generator logic: `generators/component.js`
