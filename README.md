@@ -168,7 +168,7 @@ module.exports = (options) => {
 ```
 - `filename` is the the name we want to give to the file. In our case, this will resolve to: `MyFirstComponent.js`
 - `parent` is where we want to save this file. Since we want to keep all of our react components in one place, we can hardcode that.
-- `templateName` is the name of the ejs template that cobalt uses. In our case, that is `js 'Component.stateful_component'`. Cobalt will automatically resolve this and understand that it will need to look for `templates/Component/stateful_component.ejs`.
+- `templateName` is the name of the ejs template that cobalt uses. In our case, that is `'Component.stateful_component'`. Cobalt will automatically resolve this and understand that it will need to look for `templates/Component/stateful_component.ejs`.
 - `templateData` is the data we want to pass to the template. If we look back at our template for `stateful_component`, we'll see that it uses two variables: `pascalCaseName` and `dashedName`. Since these are already present in `options.name`, it's enough to pass that to `templateData`.
 
 Now, when we execute `generate component my-First-component` on the cli, cobalt will generate the React component, put it under `imports/ui/Components` and give it the correct content. However, we also want to add stylesheets. This means that instead of a single object, our function should return an array of objects:
