@@ -1,7 +1,7 @@
 # cobalt-base
 
 You are a programmer who wastes a lot of time on coding repetitive, boilerplate stuff. For example, you want all your React components to be saved in a specific way:
-- You want them to be saved under `imports/ui/Components`
+- You want them to be saved under `ui/Components`
 - You want them to have PascalCased filenames.
 - You also want each component to have its associated css file saved under `client/stylesheets/`
 - And you want the stylesheets to have underscored_names.
@@ -206,7 +206,7 @@ function getComponent(options) {
     'Component.stateful_component';
   return {
     filename: `${options.name.pascalCaseName}.js`,
-    parent: 'imports/ui/Components',
+    parent: 'ui/Components',
     templateName: 'Component.stateful_component',
     templateData: options.name,
   };
