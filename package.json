@@ -7,7 +7,7 @@
     "camelcase": "^3.0.0",
     "cli-color": "^1.1.0",
     "command-line-args": "^3.0.1",
-    "corrected-names": "^1.0.1",
+    "corrected-names": "^1.0.2",
     "decamelize": "^1.2.0",
     "ejs": "^2.5.2",
     "fs-extra": "^0.30.0",

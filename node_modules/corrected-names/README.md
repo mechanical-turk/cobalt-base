@@ -1,5 +1,5 @@
 # corrected-names
-Given a string, returns an object with its camelCaseName, PascalCaseName, underscored_name, dashed_name and the original input string
+Given a string, returns an object with its camelCaseName, PascalCaseName, underscored_name, dashed-name and the original input string
 
 ```js
 
