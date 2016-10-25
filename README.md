@@ -190,7 +190,7 @@ options {
 module.exports = (options) => {
   return {
     filename: `${options.name.pascalCaseName}.js`,
-    parent: 'imports/ui/Components',
+    parent: 'ui/Components',
     templateName: 'Component.stateful_component',
     templateData: options.name,
   };
@@ -201,7 +201,7 @@ module.exports = (options) => {
 - `templateName` is the name of the ejs template that cobalt uses. In our case, that is `'Component.stateful_component'`. Cobalt will automatically resolve this and understand that it will need to look for `templates/Component/stateful_component.ejs`.
 - `templateData` is the data we want to pass to the template. If we look back at our template for `stateful_component`, we'll see that it uses two variables: `pascalCaseName` and `dashedName`. Since these are already present in `options.name`, it's enough to pass that to `templateData`.
 
-Now, if we execute `... generate component my-First-component` on the cli, cobalt will generate the React component, put it under `imports/ui/Components` and give it the correct content. However, we also want to add stylesheets. This means that instead of a single object, our function should return an array of objects:
+Now, if we execute `... generate component my-First-component` on the cli, cobalt will generate the React component, put it under `ui/Components` and give it the correct content. However, we also want to add stylesheets. This means that instead of a single object, our function should return an array of objects:
 
 ```js
 //generators/component.js
@@ -210,7 +210,7 @@ module.exports = (options) => {
   return [
     {
       filename: `${options.name.pascalCaseName}.js`,
-      parent: 'imports/ui/Components',
+      parent: 'ui/Components',
       templateName: 'Component.stateful_component',
       templateData: options.name,
     },
