@@ -280,7 +280,7 @@ And that's it. Now we can execute `... generate component my-first-component` an
 #Bin Executable
 
 If you want to run your scaffolding tool as bin executable from the terminal, do the following:
-- give your tool a command name, and assign it in your packages.json file. For example, if you want your scaffolder to run when you execute `myscaffolder generate component my-first-component`, replace `starter` with `myscaffolder`, so that you have the following in your `packages.json` file:
+- Give your tool a command name, and assign it in your packages.json file via the `bin` key. For example, if you want your scaffolder to run when you execute `myscaffolder generate component my-first-component`, replace `starter` with `myscaffolder`, so that you have the following in your `packages.json` file:
 ```json
 "bin": {
     "myscaffolder": "./index.js"
@@ -290,4 +290,4 @@ If you want to run your scaffolding tool as bin executable from the terminal, do
  - While in the project directory, run `npm link`. This will create a global sym-link.
  - Publish your package on npm and install it globally
  
-So now, instead of running `node ~/.../my-scaffolder/index.js generate component my-first-component`, you can just run `myscaffolder generate component my-first component`.
+So now, instead of running `node ~/.../my-scaffolder/index.js generate component my-first-component` on your terminal, you can just run `myscaffolder generate component my-first-component`.
