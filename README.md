@@ -53,13 +53,17 @@ What if you could type something like `generate component my-first-component` in
 
 `cobalt-base` is a tool for creating cli scaffolding tools. (It's a tool that creates tools - so meta)
 
-Import `cobalt-base` into your project, and with a few really easy steps, start coding your own scaffolding tool.
+Cobalt handles:
+- Generating files: `... generate something somename`
+- Deleting files: `... remove something somename`
+- Overwriting: If the command you run might overwrite a file, cobalt asks if you're sure.
+- Commandline option parsing
 
-Step 1: Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
+# Tutorial
 
-Step 2: Start Coding!
+Note: For the sake of brevity, this tutorial has the following command `node projectName/index.js generate something`, shortened to `... generate something`
 
-Note: For the sake of brevity, this tutorial will have long commands such as `node projectName/index.js generate something`, shortened to `... generate something`
+Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
 You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
 
@@ -140,19 +144,7 @@ export const <%= pascalCaseName %> = (props) => {
 - Now let's code our generator logic. Every generator file has one responsibility: Exporting a function that tells cobalt what files to create, where to save them and what to put inside them.
 - This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `generate component my-First-component --stateless` will set the options variable to: 
 
-```js
 
-options {
-  name: {
-    camelCaseName: 'myFirstComponent',
-    pascalCaseName: 'MyFirstComponent',
-    underscoredName: 'my_first_component',
-    dashedName: 'my-first-component',
-    originalName: 'my-First-component',
-  },
-  stateless: true,
-}
-```
 - With that in mind, let's create the generator logic for the stateful component:
 
 ```js
