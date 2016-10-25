@@ -252,11 +252,11 @@ module.exports = (options) => {
 - Finally, we need to tell cobalt that `--stateless` is a boolean option. Otherwise, cobalt won't be able to understand the cli options. In order to parse the cli options, cobalt uses this wonderful library: [command-line-args](https://www.npmjs.com/package/command-line-args)
 - Add the following to your index.js before `run();`.
 ```js
-    config.OPTION_DEFINITIONS.push(
-        { name: 'stateless', type: Boolean }
-    );`
+config.OPTION_DEFINITIONS.push(
+    { name: 'stateless', type: Boolean }
+);`
 ```
-- Once we update the `index.js` page, it should look the following:
+- Once we update the `index.js` page, it should look like the following:
 
 ```js
 const path = require('path');
