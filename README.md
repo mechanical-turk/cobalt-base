@@ -51,10 +51,9 @@ What if you could type something like `generate component my-first-component` in
 
 # Enter cobalt
 
-cobalt framework is a tool for creating cli scaffolding tools. (It's a tool that creates tools - so meta)
+`cobalt-base` is a tool for creating cli scaffolding tools. (It's a tool that creates tools - so meta)
 
-
-`cobalt-base` is where all the modules that are part of the cobalt framework are bundled up together into a single useful module. Import `cobalt-base` into your project, and with a few really easy steps, start coding your own scaffolding tool.
+Import `cobalt-base` into your project, and with a few really easy steps, start coding your own scaffolding tool.
 
 Step 1: Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
