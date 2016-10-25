@@ -63,20 +63,14 @@ Cobalt handles:
 
 You only need to do 2 things: create templates and their generator logics.
 
-- create template: 
-```js 
-// templates/something/index.ejs
-
+- Create template at: `templates/something/index.ejs`
+```ejs 
 Hi! My name is <%= name %>.
 I'm <%= age %> years old.
-
 ```
 
-- Add business logic
-```js 
-// generators/something.js
-
-
+- Add generator logic at: `generators/something.js`
+```js
 module.exports = (options) => {
     filename: `${options.name.underscoredName}.txt`,
     parent: 'example_parent_folder',
@@ -86,7 +80,12 @@ module.exports = (options) => {
       age: 'MY AGE',
     },
 };
+```
+Now you can just run `node projectName/index.js generate something my-first_Something`, and this will create `example_parent_folder/my_first_something.txt` with the following content:
 
+```
+Hi! My name is MY NAME.
+I'm MY AGE years old.
 ```
 
 # Tutorial
