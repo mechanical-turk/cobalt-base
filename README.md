@@ -66,7 +66,7 @@ You don't need to worry about the cli. You don't need to worry about tying thing
 
 Let's add some code so that cobalt can dynamically generate us the react components we want.
 - Create a file for the generator logic: `generators/component.js`
-- The filename **is** really important. It's how cobalt understands where to look. When you run `... generate something` on the cli, cobalt will look for `generators/something.js`. When you run `... generate dog`, cobalt will look for `generators/dog.js`.
+- The filename **is** really important. It's how cobalt understands where to look. When you run `... generate something` on the cli, cobalt will look for `generators/something.js`. Therefore when you run `... generate component`, cobalt will look for `generators/component.js`.
 - Next, we need to create the templates. Cobalt uses `ejs` templates. You don't need to have `ejs` installed. 
 - At the moment, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates: 
   - `templates/Component/stateful_component.ejs`
