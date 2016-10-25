@@ -59,7 +59,7 @@ Cobalt handles:
 - Overwriting: If the command you run might overwrite a file, cobalt asks if you're sure.
 - Commandline option parsing
 
-You will only code the templates and their business logics.
+You will only code the templates and their generator logics.
 
 # Tutorial
 
