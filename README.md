@@ -247,3 +247,14 @@ run();
 ```
 
 And that's it. Now we can execute `generate component my-first-component` and `generate component my-second-component --stateless`. This will create the files exactly the way we want them to be.
+
+#notes
+
+If you want to run your scaffolding tool as bin executable from the terminal, do the following:
+    - add `#!/usr/bin/env node` to the top of the index.js file. It's very important that this is the first line of your index.js file.
+    - give your tool a command name, and assign it in your packages.json file. For example, if you want your scaffolder to run when you execute `myscaffolder generate component my-first-component`, add the following to your `packages.json` file:
+    ```json
+        "bin": {
+            "cobalt": "./index.js"
+          },
+    ```
