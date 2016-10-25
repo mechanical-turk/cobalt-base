@@ -58,7 +58,7 @@ cobalt framework is a tool for creating cli scaffolding tools. (It's a tool that
 
 Step 1: Setup
 
-- Go to https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
+- Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
 Step 2: Start Coding!
 
