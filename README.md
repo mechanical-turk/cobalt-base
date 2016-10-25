@@ -58,38 +58,7 @@ cobalt framework is a tool for creating cli scaffolding tools. (It's a tool that
 
 Step 1: Setup
 
-- run `npm init` and set `index.js` as the entry point.
-- `npm i cobalt-base --save`
-- create two folders to store the templates and generator logic: `mkdir templates generators`
-- create an index.js:
-
-```js
-//index.js
-
-const path = require('path');
-const { run, config } = require('cobalt-base');
-
-config.TEMPLATES_DIR = path.join(__dirname, 'templates');
-config.GENERATORS_DIR = path.join(__dirname, 'generators');
-
-run();
-```
-
-
-- this will tell cobalt where your /templates and /generators folders are, and then run the tool. 
-
-If you've followed the steps, you should have something similar to this:
-
-```
-myScaffold
-│   index.js
-│   package.json
-└───node_modules
-│   └───cobalt-base
-│   └───...
-└───generators
-└───templates
-```
+- Go to https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
 Step 2: Start Coding!
 
