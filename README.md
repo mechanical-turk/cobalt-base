@@ -251,7 +251,6 @@ And that's it. Now we can execute `generate component my-first-component` and `g
 #Bin Executable
 
 If you want to run your scaffolding tool as bin executable from the terminal, do the following:
-- add `#!/usr/bin/env node` to the top of the index.js file. It's very important that this is the first line of your index.js file.
 - give your tool a command name, and assign it in your packages.json file. For example, if you want your scaffolder to run when you execute `myscaffolder generate component my-first-component`, replace `starter` with `myscaffolder`, so that you have the following in your `packages.json` file:
 ```json
 "bin": {
