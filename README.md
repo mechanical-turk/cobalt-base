@@ -57,9 +57,9 @@ Import `cobalt-base` into your project, and with a few really easy steps, start 
 
 Step 1: Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
-Note: For the sake of brevity, this tutorial will have long commands such as `node projectName/index.js generate something`, shortened to `... generate something`
-
 Step 2: Start Coding!
+
+Note: For the sake of brevity, this tutorial will have long commands such as `node projectName/index.js generate something`, shortened to `... generate something`
 
 You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
 
