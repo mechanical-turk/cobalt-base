@@ -255,7 +255,7 @@ If you want to run your scaffolding tool as bin executable from the terminal, do
 ```json
 "bin": {
     "myscaffolder": "./index.js"
-},
+}
 ```
 - Finally, you need to make your module globally accessible. There are two ways of doing this.
  - While in the project directory, run `npm link`. This will create a global sym-link.
