@@ -59,7 +59,35 @@ Cobalt handles:
 - Overwriting: If the command you run might overwrite a file, cobalt asks if you're sure.
 - Commandline option parsing
 
-You will only code the templates and their generator logics.
+# How
+
+You only need to do 2 things: create templates and their generator logics.
+
+- create template: 
+```js 
+// templates/something/index.ejs
+
+Hi! My name is <%= name %>.
+I'm <%= age %> years old.
+
+```
+
+- Add business logic
+```js 
+// generators/something.js
+
+
+module.exports = (options) => {
+    filename: `${options.name.underscoredName}.txt`,
+    parent: 'example_parent_folder',
+    templateName: 'something.index',
+    templateData: {
+      name: 'MY NAME',
+      age: 'MY AGE',
+    },
+};
+
+```
 
 # Tutorial
 
