@@ -63,11 +63,9 @@ Cobalt handles:
 
 Note: For the sake of brevity, this tutorial has the following command `node projectName/index.js generate something`, shortened to `... generate something`
 
-Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
+In this tutorial, we will automate React Component generation (described above).
 
-You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
-
-Let's add some code so that cobalt can dynamically generate us the react components we want.
+- Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 - Create a file for the generator logic: `generators/component.js`
 - The filename **is** really important. It's how cobalt understands where to look. When you run `... generate something` on the cli, cobalt will look for `generators/something.js`. Therefore when you run `... generate component`, cobalt will look for `generators/component.js`.
 - Next, we need to create the templates. Cobalt uses `ejs` templates. You don't need to have `ejs` installed. 
