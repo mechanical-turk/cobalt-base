@@ -58,7 +58,7 @@ cobalt framework is a tool for creating cli scaffolding tools. (It's a tool that
 
 Step 1: Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
-Note: For the sake of cleanliness, we will skip to prepend our cli commands with the node calls. For example, instead of writing `node projectName/index.js generate something`, we will simply write `... generate something`
+Note: For the sake of brevity, throughout this tutorial instead of writing `node projectName/index.js generate something`, we will simply write `... generate something`
 
 Step 2: Start Coding!
 
