@@ -58,13 +58,15 @@ cobalt framework is a tool for creating cli scaffolding tools. (It's a tool that
 
 Step 1: Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 
+Note: For the sake of cleanliness, we will skip to prepend our cli commands with the node calls. For example, instead of writing `node projectName/index.js generate something`, we will simply write `... generate something`
+
 Step 2: Start Coding!
 
 You don't need to worry about the cli. You don't need to worry about tying things together either. Everything is done for you in the background. You just need to place your files carefully, because that's how cobalt understands how you want things to be tied.
 
 Let's add some code so that cobalt can dynamically generate us the react components we want.
 - Create a file for the generator logic: `generators/component.js`
-- The filename **is** really important. It's how cobalt understands where to look. When you run `generate something` on the cli, cobalt will look for `generators/something.js`. When you run `generate dog`, cobalt will look for `generators/dog.js`.
+- The filename **is** really important. It's how cobalt understands where to look. When you run `... generate something` on the cli, cobalt will look for `generators/something.js`. When you run `... generate dog`, cobalt will look for `generators/dog.js`.
 - Next, we need to create the templates. Cobalt uses `ejs` templates. You don't need to have `ejs` installed. 
 - At the moment, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates: 
   - `templates/Component/stateful_component.ejs`
