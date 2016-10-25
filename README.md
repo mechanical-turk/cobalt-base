@@ -224,36 +224,27 @@ module.exports = (options) => {
 }
 ```
 
-Now, we also need to consider stateless components. In order to keep our code manageable, let's modularize it a little bit, and let's code the option to have stateless components:
+We also need to consider stateless components:
 
 ```js
 //generators/component.js
 
-function getComponent(options) {
-  const templateName = options.stateless ?
-    'Component.stateless_component' :
-    'Component.stateful_component';
-  return {
-    filename: `${options.name.pascalCaseName}.js`,
-    parent: 'ui/Components',
-    templateName: 'Component.stateful_component',
-    templateData: options.name,
-  };
-}
-
-function getStylesheet(options) {
-  return {
-    filename: `${options.name.underscoredName}.css`,
-    parent: 'client',
-    templateName: 'Stylesheet.component',
-    templateData: options.name,
-  };
-}
-
 module.exports = (options) => {
   return [
-    getComponent(options),
-    getStylesheet(options),
+    {
+      filename: `${options.name.pascalCaseName}.js`,
+      parent: 'ui/Components',
+      templateName: options.stateless ?
+        'Component.stateless_component' :
+        'Component.stateful_component',
+      templateData: options.name,
+    },
+    {
+      filename: `${options.name.underscoredName}.css`,
+      parent: 'client',
+      templateName: 'Stylesheet.component',
+      templateData: options.name,
+    },
   ];
 }
 ```
