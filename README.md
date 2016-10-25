@@ -275,7 +275,7 @@ config.OPTION_DEFINITIONS.push(
 run();
 ```
 
-And that's it. Now we can execute `generate component my-first-component` and `generate component my-second-component --stateless`. This will create the files exactly the way we want them to be.
+And that's it. Now we can execute ... generate component my-first-component` and `... generate component my-second-component --stateless`. This will create the files exactly the way we want them to be.
 
 #Bin Executable
 
