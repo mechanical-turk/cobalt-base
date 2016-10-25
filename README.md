@@ -63,7 +63,7 @@ Cobalt handles:
 
 Note: For the sake of brevity, this tutorial has the following command `node projectName/index.js generate something`, shortened to `... generate something`
 
-In this tutorial, we will automate React Component generation (described above).
+In this tutorial, we will create a script that dynamically generates React componens and their corresponding css files.
 
 - Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 - Create a file for the generator logic: `generators/component.js`
