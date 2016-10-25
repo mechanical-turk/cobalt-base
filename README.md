@@ -120,7 +120,6 @@ myScaffold
 │   └───Stylesheet
 │       │   component.ejs
 ```
-- The way we name templates is not as strictly enforced as we name generators. However, there is some logic behind it as we'll see later.
 - Let's populate these templates:
 
 ```js
