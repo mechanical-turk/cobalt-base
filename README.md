@@ -68,8 +68,7 @@ In this tutorial, we will automate React Component generation (described above).
 - Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 - Create a file for the generator logic: `generators/component.js`
 - The filename **is** really important. It's how cobalt understands where to look. When you run `... generate something` on the cli, cobalt will look for `generators/something.js`. Therefore when you run `... generate component`, cobalt will look for `generators/component.js`.
-- Next, we need to create the templates. Cobalt uses `ejs` templates. You don't need to have `ejs` installed. 
-- At the moment, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates: 
+- As described in the intro, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates: 
   - `templates/Component/stateful_component.ejs`
   - `templates/Component/stateless_component.ejs` 
   - `templates/Stylesheet/component.ejs`
