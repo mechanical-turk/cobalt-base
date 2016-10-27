@@ -59,13 +59,40 @@ Cobalt handles:
 - Overwriting: If the command you run might overwrite a file, cobalt asks if you're sure.
 - Commandline option parsing
 
-You will only code the templates and their generator logics.
+# How
+
+You only need to do 2 things: create templates and their generator logics.
+
+- Create template at: `templates/something/index.ejs`
+```ejs 
+Hi! My name is <%= name %>.
+I'm <%= age %> years old.
+```
+
+- Add generator logic at: `generators/something.js`
+```js
+module.exports = (options) => {
+    filename: `${options.name.underscoredName}.txt`,
+    parent: 'example_parent_folder',
+    templateName: 'something.index',
+    templateData: {
+      name: 'MY NAME',
+      age: 'MY AGE',
+    },
+};
+```
+Now you can just run `node projectName/index.js generate something my-first_Something`, and this will create `example_parent_folder/my_first_something.txt` with the following content:
+
+```
+Hi! My name is MY NAME.
+I'm MY AGE years old.
+```
 
 # Tutorial
 
 Note: For the sake of brevity, this tutorial has the following command `node projectName/index.js generate something`, shortened to `... generate something`
 
-In this tutorial, we will create a script that dynamically generates React componens and their corresponding css files.
+In this tutorial, we will create a script that dynamically generates React components and their corresponding css files.
 
 - Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 - Create a file for the generator logic: `generators/component.js`
@@ -93,7 +120,6 @@ myScaffold
 │   └───Stylesheet
 │       │   component.ejs
 ```
-- The way we name templates is not as strictly enforced as we name generators. However, there is some logic behind it as we'll see later.
 - Let's populate these templates:
 
 ```js
@@ -141,8 +167,20 @@ export const <%= pascalCaseName %> = (props) => {
 }
 ```
 - Now let's code our generator logic. Every generator file has one responsibility: Exporting a function that tells cobalt what files to create, where to save them and what to put inside them.
-- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `generate component my-First-component --stateless` will set the options variable to: 
+- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component --stateless` will set the options variable to: 
+```js
 
+options {
+  name: {
+    camelCaseName: 'myFirstComponent',
+    pascalCaseName: 'MyFirstComponent',
+    underscoredName: 'my_first_component',
+    dashedName: 'my-first-component',
+    originalName: 'my-First-component',
+  },
+  stateless: true,
+}
+```
 
 - With that in mind, let's create the generator logic for the stateful component:
 
@@ -152,7 +190,7 @@ export const <%= pascalCaseName %> = (props) => {
 module.exports = (options) => {
   return {
     filename: `${options.name.pascalCaseName}.js`,
-    parent: 'imports/ui/Components',
+    parent: 'ui/Components',
     templateName: 'Component.stateful_component',
     templateData: options.name,
   };
@@ -163,7 +201,7 @@ module.exports = (options) => {
 - `templateName` is the name of the ejs template that cobalt uses. In our case, that is `'Component.stateful_component'`. Cobalt will automatically resolve this and understand that it will need to look for `templates/Component/stateful_component.ejs`.
 - `templateData` is the data we want to pass to the template. If we look back at our template for `stateful_component`, we'll see that it uses two variables: `pascalCaseName` and `dashedName`. Since these are already present in `options.name`, it's enough to pass that to `templateData`.
 
-Now, when we execute `generate component my-First-component` on the cli, cobalt will generate the React component, put it under `imports/ui/Components` and give it the correct content. However, we also want to add stylesheets. This means that instead of a single object, our function should return an array of objects:
+Now, if we execute `... generate component my-First-component` on the cli, cobalt will generate the React component, put it under `ui/Components` and give it the correct content. However, we also want to add stylesheets. This means that instead of a single object, our function should return an array of objects:
 
 ```js
 //generators/component.js
@@ -172,7 +210,7 @@ module.exports = (options) => {
   return [
     {
       filename: `${options.name.pascalCaseName}.js`,
-      parent: 'imports/ui/Components',
+      parent: 'ui/Components',
       templateName: 'Component.stateful_component',
       templateData: options.name,
     },
@@ -186,42 +224,37 @@ module.exports = (options) => {
 }
 ```
 
-Now, we also need to consider stateless components. In order to keep our code manageable, let's modularize it a little bit, and let's code the option to have stateless components:
+We also need to consider stateless components:
 
 ```js
 //generators/component.js
 
-function getComponent(options) {
-  const templateName = options.stateless ?
-    'Component.stateless_component' :
-    'Component.stateful_component';
-  return {
-    filename: `${options.name.pascalCaseName}.js`,
-    parent: 'ui/Components',
-    templateName: 'Component.stateful_component',
-    templateData: options.name,
-  };
-}
-
-function getStylesheet(options) {
-  return {
-    filename: `${options.name.underscoredName}.css`,
-    parent: 'client',
-    templateName: 'Stylesheet.component',
-    templateData: options.name,
-  };
-}
-
 module.exports = (options) => {
   return [
-    getComponent(options),
-    getStylesheet(options),
+    {
+      filename: `${options.name.pascalCaseName}.js`,
+      parent: 'ui/Components',
+      templateName: options.stateless ?
+        'Component.stateless_component' :
+        'Component.stateful_component',
+      templateData: options.name,
+    },
+    {
+      filename: `${options.name.underscoredName}.css`,
+      parent: 'client',
+      templateName: 'Stylesheet.component',
+      templateData: options.name,
+    },
   ];
 }
 ```
 
-- Finally, we need to tell cobalt that `--stateless` is a boolean option. Otherwise, cobalt won't be able to understand the cli options. In order to parse the cli options, cobalt uses this wonderful library: [command-line-args](https://www.npmjs.com/package/command-line-args) 
-- Once we update the `index.js` page, it should look the following:
+- Finally, we need to tell cobalt that `--stateless` is a boolean option. Otherwise, cobalt won't be able to understand the cli options. In order to parse the cli options, cobalt uses this wonderful library: [command-line-args](https://www.npmjs.com/package/command-line-args)
+- Add the following line to your index.js before `run();`.
+```js
+config.OPTION_DEFINITIONS.push({ name: 'stateless', type: Boolean });
+```
+- Once we update the `index.js` page, it should look like the following:
 
 ```js
 const path = require('path');
@@ -230,19 +263,17 @@ const { run, config } = require('cobalt-base');
 config.TEMPLATES_DIR = path.join(__dirname, 'templates');
 config.GENERATORS_DIR = path.join(__dirname, 'generators');
 
-config.OPTION_DEFINITIONS.push(
-  { name: 'stateless', type: Boolean }
-);
+config.OPTION_DEFINITIONS.push({ name: 'stateless', type: Boolean });
 
 run();
 ```
 
-And that's it. Now we can execute `generate component my-first-component` and `generate component my-second-component --stateless`. This will create the files exactly the way we want them to be.
+And that's it. Now we can execute `... generate component my-first-component` and `... generate component my-second-component --stateless`. This will create the files exactly the way we want them to be.
 
 #Bin Executable
 
 If you want to run your scaffolding tool as bin executable from the terminal, do the following:
-- give your tool a command name, and assign it in your packages.json file. For example, if you want your scaffolder to run when you execute `myscaffolder generate component my-first-component`, replace `starter` with `myscaffolder`, so that you have the following in your `packages.json` file:
+- Give your tool a command name, and assign it in your package.json file via the `bin` key. For example, if you want your scaffolder to run when you execute `myscaffolder generate component my-first-component`, replace `starter` with `myscaffolder`, so that you have the following in your `packages.json` file:
 ```json
 "bin": {
     "myscaffolder": "./index.js"
@@ -252,4 +283,4 @@ If you want to run your scaffolding tool as bin executable from the terminal, do
  - While in the project directory, run `npm link`. This will create a global sym-link.
  - Publish your package on npm and install it globally
  
-So now, instead of running `node ~/.../my-scaffolder/index.js generate component my-first-component`, you can just run `myscaffolder generate component my-first component`.
+So now, instead of running `node ~/.../my-scaffolder/index.js generate component my-first-component` on your terminal, you can just run `myscaffolder generate component my-first-component`.
