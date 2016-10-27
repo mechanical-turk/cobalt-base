@@ -1,5 +1,7 @@
 const config = require('./config.js');
-const { getOptions, getCommand } = require('./lib/argv-manager.js');
+const getCorrectedNames = require('corrected-names');
+const commandLineArgs = require('command-line-args');
+const { getCommand } = require('./lib/argv-manager.js');
 const { loadGenerators } = require('./lib/generator.js');
 
 function run() {
@@ -8,7 +10,7 @@ function run() {
     generate: generators.generate,
     remove: generators.remove,
   };
-  const options = getOptions();
+  const options = commandLineArgs(config.OPTION_DEFINITIONS);
   const command = getCommand(options);
   command(options);
 }

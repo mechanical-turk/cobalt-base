@@ -30,7 +30,7 @@ const config = {
     },
   },
   OPTION_DEFINITIONS: [
-    { name: 'mainArgs', type: String, multiple: true, defaultOption: true },
+    { name: 'argv', type: String, multiple: true, defaultOption: true },
   ],
   ERR_DEV: {
     FUNCTION_NOT_IMPLEMENTED: (functionName) => {

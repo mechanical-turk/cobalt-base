@@ -64,7 +64,7 @@ Cobalt handles:
 You only need to do 2 things: create templates and their generator logics.
 
 - Create template at: `templates/something/index.ejs`
-```ejs 
+```ejs
 Hi! My name is <%= name %>.
 I'm <%= age %> years old.
 ```
@@ -97,9 +97,9 @@ In this tutorial, we will create a script that dynamically generates React compo
 - Follow the instructions at https://github.com/keremkazan/cobalt-starter to get the boilerplate code.
 - Create a file for the generator logic: `generators/component.js`
 - The filename **is** really important. It's how cobalt understands where to look. When you run `... generate something` on the cli, cobalt will look for `generators/something.js`. Therefore when you run `... generate component`, cobalt will look for `generators/component.js`.
-- As described in the intro, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates: 
+- As described in the intro, we want a template for our React component, and another one for its corresponding css file. There are two types of React components: stateful and stateless. So let's actually create the following 3 templates:
   - `templates/Component/stateful_component.ejs`
-  - `templates/Component/stateless_component.ejs` 
+  - `templates/Component/stateless_component.ejs`
   - `templates/Stylesheet/component.ejs`
 
 Our project directory should now look like this:
@@ -167,32 +167,31 @@ export const <%= pascalCaseName %> = (props) => {
 }
 ```
 - Now let's code our generator logic. Every generator file has one responsibility: Exporting a function that tells cobalt what files to create, where to save them and what to put inside them.
-- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component --stateless` will set the options variable to: 
+- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component --stateless` will set the options variable to:
 ```js
 
 options {
-  name: {
-    camelCaseName: 'myFirstComponent',
-    pascalCaseName: 'MyFirstComponent',
-    underscoredName: 'my_first_component',
-    dashedName: 'my-first-component',
-    originalName: 'my-First-component',
-  },
+  argv: [
+    'my-First-component'
+  ],
   stateless: true,
 }
 ```
 
-- With that in mind, let's create the generator logic for the stateful component:
+- With that in mind, let's create the generator logic for the stateful component. In order to convert the user input to its camelCased, underscored, pascalCased etc. versions, we will use the [corrected-names](https://github.com/keremkazan/corrected-names) library. You don't need to worry about installing this library as `cobalt-starter` comes with it.
 
 ```js
 //generators/component.js
 
+const getCorrectedNames = require('corrected-names');
+
 module.exports = (options) => {
+  const name = getCorrectedNames(options.argv[0]);
   return {
-    filename: `${options.name.pascalCaseName}.js`,
+    filename: `${name.pascalCaseName}.js`,
     parent: 'ui/Components',
     templateName: 'Component.stateful_component',
-    templateData: options.name,
+    templateData: name,
   };
 }
 ```
@@ -206,19 +205,22 @@ Now, if we execute `... generate component my-First-component` on the cli, cobal
 ```js
 //generators/component.js
 
+const getCorrectedNames = require('corrected-names');
+
 module.exports = (options) => {
+  const name = getCorrectedNames(options.argv[0]);
   return [
     {
-      filename: `${options.name.pascalCaseName}.js`,
+      filename: `${name.pascalCaseName}.js`,
       parent: 'ui/Components',
       templateName: 'Component.stateful_component',
-      templateData: options.name,
+      templateData: name,
     },
     {
-      filename: `${options.name.underscoredName}.css`,
+      filename: `${name.underscoredName}.css`,
       parent: 'client',
       templateName: 'Stylesheet.component',
-      templateData: options.name,
+      templateData: name,
     },
   ];
 }
@@ -229,21 +231,24 @@ We also need to consider stateless components:
 ```js
 //generators/component.js
 
+const getCorrectedNames = require('corrected-names');
+
 module.exports = (options) => {
+const name = getCorrectedNames(options.argv[0]);
   return [
     {
-      filename: `${options.name.pascalCaseName}.js`,
+      filename: `${name.pascalCaseName}.js`,
       parent: 'ui/Components',
       templateName: options.stateless ?
         'Component.stateless_component' :
         'Component.stateful_component',
-      templateData: options.name,
+      templateData: name,
     },
     {
-      filename: `${options.name.underscoredName}.css`,
+      filename: `${name.underscoredName}.css`,
       parent: 'client',
       templateName: 'Stylesheet.component',
-      templateData: options.name,
+      templateData: name,
     },
   ];
 }
@@ -282,5 +287,5 @@ If you want to run your scaffolding tool as bin executable from the terminal, do
 - Finally, you need to make your module globally accessible. There are two ways of doing this.
  - While in the project directory, run `npm link`. This will create a global sym-link.
  - Publish your package on npm and install it globally
- 
+
 So now, instead of running `node ~/.../my-scaffolder/index.js generate component my-first-component` on your terminal, you can just run `myscaffolder generate component my-first-component`.
