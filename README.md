@@ -167,12 +167,13 @@ export const <%= pascalCaseName %> = (props) => {
 }
 ```
 - Now let's code our generator logic. Every generator file has one responsibility: Exporting a function that tells cobalt what files to create, where to save them and what to put inside them.
-- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component --stateless` will set the options variable to:
+- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component my_second-Component --stateless` will set the options variable to:
 ```js
 
 options {
   argv: [
-    'my-First-component'
+    'my-First-component',
+    'my_second-Component',
   ],
   stateless: true,
 }
