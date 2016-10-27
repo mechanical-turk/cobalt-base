@@ -72,7 +72,7 @@ I'm <%= age %> years old.
 - Add generator logic at: `generators/something.js`
 ```js
 module.exports = (options) => {
-    filename: `${options.name.underscoredName}.txt`,
+    filename: `${options.argv[0]}.txt`,
     parent: 'example_parent_folder',
     templateName: 'something.index',
     templateData: {
@@ -81,7 +81,7 @@ module.exports = (options) => {
     },
 };
 ```
-Now you can just run `node projectName/index.js generate something my-first_Something`, and this will create `example_parent_folder/my_first_something.txt` with the following content:
+Now you can just run `node projectName/index.js generate something my_first_something`, and this will create `example_parent_folder/my_first_something.txt` with the following content:
 
 ```
 Hi! My name is MY NAME.
@@ -167,12 +167,13 @@ export const <%= pascalCaseName %> = (props) => {
 }
 ```
 - Now let's code our generator logic. Every generator file has one responsibility: Exporting a function that tells cobalt what files to create, where to save them and what to put inside them.
-- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component --stateless` will set the options variable to:
+- This function takes in one param: `options`. This param will give us access to the variables we have typed on the cli. For example, `... generate component my-First-component my_second-Component --stateless` will set the options variable to:
 ```js
 
 options {
   argv: [
-    'my-First-component'
+    'my-First-component',
+    'my_second-Component',
   ],
   stateless: true,
 }
@@ -198,7 +199,22 @@ module.exports = (options) => {
 - `filename` is the the name we want to give to the file. In our case, this will resolve to: `MyFirstComponent.js`
 - `parent` is where we want to save this file. Since we want to keep all of our react components in one place, we can hardcode that.
 - `templateName` is the name of the ejs template that cobalt uses. In our case, that is `'Component.stateful_component'`. Cobalt will automatically resolve this and understand that it will need to look for `templates/Component/stateful_component.ejs`.
-- `templateData` is the data we want to pass to the template. If we look back at our template for `stateful_component`, we'll see that it uses two variables: `pascalCaseName` and `dashedName`. Since these are already present in `options.name`, it's enough to pass that to `templateData`.
+- `templateData` is the data we want to pass to the template. If we look back at our template for `stateful_component`, we'll see that it uses two variables: `pascalCaseName` and `dashedName`. Now let's look at the variable `name`. 
+
+```js
+const name = getCorrectedNames(options.argv[0])
+
+/*
+name = {
+  camelCaseName: 'myFirstComponent',
+  pascalCaseName: 'MyFirstComponent',
+  dashedName: 'my-first-component',
+  underscoredName: 'my_first_component',
+  originalName: 'my-First-component',
+}
+*/
+
+```
 
 Now, if we execute `... generate component my-First-component` on the cli, cobalt will generate the React component, put it under `ui/Components` and give it the correct content. However, we also want to add stylesheets. This means that instead of a single object, our function should return an array of objects:
 
