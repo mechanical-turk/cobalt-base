@@ -1,6 +1,6 @@
 {
   "name": "cobalt-base",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a tool for creating cli scaffolding tools",
   "main": "index.js",
   "dependencies": {
