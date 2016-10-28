@@ -43,6 +43,8 @@ const config = {
       return `templatePaths for <${command}> not found. Modify the config.js file to add templatePaths for this command. Look for config.TEMPLATES.`;
     },
   },
+  COMMANDS: {
+  },
 };
 
 module.exports = config;
