@@ -6,10 +6,8 @@ const { loadGenerators } = require('./lib/generator.js');
 
 function run() {
   const generators = loadGenerators();
-  config.COMMANDS = {
-    generate: generators.generate,
-    remove: generators.remove,
-  };
+  config.COMMANDS.generate = generators.generate;
+  config.COMMANDS.remove = generators.remove;
   const options = commandLineArgs(config.OPTION_DEFINITIONS);
   const command = getCommand(options);
   command(options);
