@@ -2,7 +2,6 @@ const config = require('./config.js');
 const getCorrectedNames = require('corrected-names');
 const commandLineArgs = require('command-line-args');
 
-const loader = require('./lib/loader.js');
 const { getCommand } = require('./lib/argv-manager.js');
 const { loadGenerators } = require('./lib/generator.js');
 
@@ -18,5 +17,4 @@ function run() {
 module.exports = {
   config,
   run,
-  loader,
-}
+};
